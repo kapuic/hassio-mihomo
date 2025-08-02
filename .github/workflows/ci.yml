@@ -1,0 +1,43 @@
+name: Build Mihomo
+
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  build-and-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout add-on repo
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "stable"
+
+      - name: Fetch Mihomo source
+        run: |
+          rm -rf upstream-mihomo
+          git clone --branch Meta https://github.com/MetaCubeX/mihomo.git upstream-mihomo
+
+      - name: Create mihomo directory
+        run: mkdir -p mihomo
+
+      - name: Build ARM64 binary
+        run: |
+          cd upstream-mihomo
+          go mod download
+          GOOS=linux GOARCH=arm64 go build -o ../mihomo/mihomo
+
+      - name: Commit updated binary
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add mihomo/mihomo
+          git diff --quiet || git commit -m "chore: bump mihomo to latest"
+          git push

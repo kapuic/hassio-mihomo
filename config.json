@@ -1,0 +1,12 @@
+{
+  "name": "Mihomo Proxy",
+  "version": "1.0.0",
+  "slug": "mihomo",
+  "description": "Mihomo TProxy proxy",
+  "arch": ["arm64"],
+  "startup": "application",
+  "boot": "auto",
+  "host_network": true,
+  "options": {},
+  "schema": {}
+}
