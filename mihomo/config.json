@@ -2,11 +2,28 @@
   "name": "Mihomo Proxy",
   "version": "1.0.0",
   "slug": "mihomo",
-  "description": "Mihomo TProxy proxy",
+  "description": "Mihomo (Clash.Meta) - A rule-based transparent proxy with advanced routing capabilities",
+  "url": "https://github.com/kapuic/hassio-mihomo/tree/main/mihomo",
   "arch": ["arm64"],
   "startup": "application",
   "boot": "auto",
   "host_network": true,
+  "ports": {
+    "7890/tcp": 7890,
+    "7891/tcp": 7891,
+    "7893/tcp": 7893,
+    "9898/tcp": 9898,
+    "9090/tcp": 9090,
+    "53/udp": 53
+  },
+  "ports_description": {
+    "7890/tcp": "HTTP Proxy",
+    "7891/tcp": "SOCKS5 Proxy",
+    "7893/tcp": "Mixed Proxy",
+    "9898/tcp": "TProxy",
+    "9090/tcp": "API/Dashboard",
+    "53/udp": "DNS Server"
+  },
   "options": {},
   "schema": {}
 }
