@@ -7,7 +7,7 @@ RUN apk add --no-cache ca-certificates bash
 WORKDIR /app
 
 # Copy files to container
-COPY mihomo/mihomo /app/mihomo
+COPY mihomo /app/mihomo
 COPY start-mihomo.sh /app/start-mihomo.sh
 COPY config.yaml /app/config.yaml
 
