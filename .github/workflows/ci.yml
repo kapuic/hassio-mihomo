@@ -10,14 +10,29 @@ permissions:
   contents: write
 
 jobs:
-  build-and-commit:
+  build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - arch: aarch64
+            goarch: arm64
+            goarm: ""
+          - arch: amd64
+            goarch: amd64
+            goarm: ""
+          - arch: armv7
+            goarch: arm
+            goarm: 7
+          - arch: armhf
+            goarch: arm
+            goarm: 6
+          - arch: i386
+            goarch: "386"
+            goarm: ""
     steps:
       - name: Checkout add-on repo
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          persist-credentials: true
 
       - name: Set up Go
         uses: actions/setup-go@v5
@@ -29,16 +44,42 @@ jobs:
           rm -rf upstream-mihomo
           git clone --branch Meta https://github.com/MetaCubeX/mihomo.git upstream-mihomo
 
-      - name: Build ARM64 binary
+      - name: Build binary for ${{ matrix.arch }}
+        env:
+          GOARCH: ${{ matrix.goarch }}
+          GOARM: ${{ matrix.goarm }}
         run: |
           cd upstream-mihomo
           go mod download
-          GOOS=linux GOARCH=arm64 go build -o ../mihomo/mihomo
+          GOOS=linux go build -o ../mihomo/mihomo-${{ matrix.arch }}
 
-      - name: Commit updated binary
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mihomo-${{ matrix.arch }}
+          path: mihomo/mihomo-${{ matrix.arch }}
+
+  commit:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout add-on repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: mihomo
+          pattern: mihomo-*
+          merge-multiple: true
+
+      - name: Commit updated binaries
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add mihomo/mihomo
+          git add mihomo/mihomo-*
           git diff --quiet || git commit -m "chore: bump mihomo to latest"
           git push

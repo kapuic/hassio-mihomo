@@ -6,9 +6,14 @@ description: Mihomo (Clash.Meta) - A rule-based transparent proxy with advanced 
 url: "https://github.com/kapuic/hassio-mihomo/tree/main/mihomo"
 arch:
   - aarch64
+  - amd64
+  - armv7
+  - armhf
+  - i386
 startup: application
 boot: auto
 host_network: true
+rating: 4
 ports:
   7890/tcp: 7890
   7891/tcp: 7891

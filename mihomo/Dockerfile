@@ -6,8 +6,9 @@ RUN apk add --no-cache ca-certificates bash
 # Create app directory
 WORKDIR /app
 
-# Copy files to container
-COPY mihomo /app/mihomo
+# Copy architecture-specific binary
+ARG BUILD_ARCH
+COPY mihomo-${BUILD_ARCH} /app/mihomo
 COPY start-mihomo.sh /app/start-mihomo.sh
 COPY mihomo-default.yaml /app/mihomo-default.yaml
 

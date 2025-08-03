@@ -23,7 +23,7 @@ allow-lan: true
 # "*": bind all IP addresses
 # 192.168.122.11: bind a single IPv4 address
 # "[aaaa::a8aa:ff:fe09:57d8]": bind a single IPv6 address
-bind-address: '*'
+bind-address: "*"
 
 # Router working mode
 # rule: rule-based packet routing
@@ -67,46 +67,46 @@ dns:
   enable: true
   listen: 0.0.0.0:53
   # ipv6: true # when set to false, resolver won't translate hostnames to IPv6 addresses
-  
+
   # DNS over HTTPS
   # use-hosts: true # defaults to true
   # use-system-hosts: true # defaults to true
-  
+
   # Cache algorithm
   # cache-algorithm: arc # arc/lru/lfu, default arc
-  
+
   # These nameservers are used to resolve the DNS nameserver hostnames below.
   # Specify IP addresses only
   default-nameserver:
     - 114.114.114.114
     - 8.8.8.8
-  
+
   enhanced-mode: fake-ip # or redir-host
   fake-ip-range: 198.18.0.1/16
-  
+
   # Hostnames in this list will not be resolved with fake IPs
   fake-ip-filter:
-    - '*.lan'
+    - "*.lan"
     - localhost.ptlogin2.qq.com
-    - '+.srv.nintendo.net'
-    - '+.stun.playstation.net'
-    - '+.msftconnecttest.com'
-    - '+.msftncsi.com'
-    - '+.xboxlive.com'
-    - 'msftconnecttest.com'
-    - 'xbox.*.microsoft.com'
-    - '*.battlenet.com.cn'
-    - '*.battlenet.com'
-    - '*.blzstatic.cn'
-    - '*.battle.net'
-  
+    - "+.srv.nintendo.net"
+    - "+.stun.playstation.net"
+    - "+.msftconnecttest.com"
+    - "+.msftncsi.com"
+    - "+.xboxlive.com"
+    - "msftconnecttest.com"
+    - "xbox.*.microsoft.com"
+    - "*.battlenet.com.cn"
+    - "*.battlenet.com"
+    - "*.blzstatic.cn"
+    - "*.battle.net"
+
   # Nameservers
   nameserver:
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
     - 114.114.114.114
     - 8.8.8.8
-  
+
   # DNS proxy server policies
   # nameserver-policy:
   #   'www.baidu.com': '114.114.114.114'
@@ -132,7 +132,7 @@ proxy-groups:
   #   proxies:
   #     - auto
   #     - DIRECT
-  
+
   # - name: auto
   #   type: url-test
   #   proxies:
@@ -151,7 +151,7 @@ proxies:
   #   cipher: chacha20-ietf-poly1305
   #   password: "password"
   #   udp: true
-  
+
   # VMess example
   # - name: "vmess"
   #   type: vmess
@@ -163,7 +163,7 @@ proxies:
   #   udp: true
   #   tls: true
   #   servername: example.com
-  
+
   # Trojan example
   # - name: "trojan"
   #   type: trojan
@@ -185,7 +185,7 @@ rules:
   - IP-CIDR6,::1/128,DIRECT
   - IP-CIDR6,fc00::/7,DIRECT
   - IP-CIDR6,fe80::/10,DIRECT
-  
+
   # Final rule
   - MATCH,DIRECT
 
