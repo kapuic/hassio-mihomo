@@ -9,7 +9,7 @@ WORKDIR /app
 # Copy files to container
 COPY mihomo /app/mihomo
 COPY start-mihomo.sh /app/start-mihomo.sh
-COPY config.yaml /app/config.yaml
+COPY mihomo-default.yaml /app/mihomo-default.yaml
 
 # Make scripts executable
 RUN chmod +x /app/mihomo /app/start-mihomo.sh

@@ -9,7 +9,15 @@
 
 A Home Assistant add-on repository for running [Mihomo][mihomo] (formerly Clash.Meta) as a transparent proxy with advanced routing capabilities.
 
-**Note**: This is a Home Assistant add-on repository. The add-on files are located in the `mihomo` directory.
+## Add-ons
+
+This repository contains the following add-ons
+
+### [Mihomo Proxy](./mihomo)
+
+![Supports aarch64 Architecture][aarch64-shield]
+
+_Mihomo (Clash.Meta) - A rule-based transparent proxy with advanced routing capabilities._
 
 ## About
 

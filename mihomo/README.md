@@ -1,5 +1,7 @@
-# Mihomo Add-on
+# Home Assistant Add-on: Mihomo
 
-This is the Mihomo (Clash.Meta) add-on for Home Assistant.
+Mihomo (Clash.Meta) - A rule-based transparent proxy with advanced routing capabilities.
 
-For full documentation, please see the [main repository README](https://github.com/kapuic/hassio-mihomo).
+![Supports aarch64 Architecture][aarch64-shield]
+
+[aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
